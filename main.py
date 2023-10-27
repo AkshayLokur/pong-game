@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -18,6 +19,7 @@ screen.onkey(left_paddle.go_up, "w")
 screen.onkey(left_paddle.go_down, "s")
 
 ball = Ball()
+scoreboard = Scoreboard()
 
 is_game_on = True
 
@@ -33,5 +35,13 @@ while is_game_on:
     if ball.xcor() > 320 and ball.distance(right_paddle) < 20 or \
             ball.xcor() < 320 and ball.distance(left_paddle) < 20:
         ball.bounce_x()
+
+    # Check if ball goes out of bounds of window on left and right
+    if ball.xcor() > 390:
+        ball.start_again()
+        scoreboard.l_point()
+    elif ball.xcor() < -390:
+        ball.start_again()
+        scoreboard.r_point()
 
 screen.exitonclick()

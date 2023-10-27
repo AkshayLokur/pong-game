@@ -20,4 +20,8 @@ class Ball(Turtle):
 
     def bounce_x(self):
         self.x_move *= -1
-        print("bounce_x")
+
+    def start_again(self):
+        self.goto(0, 0)
+        self.bounce_x()
+        time.sleep(0.2)
